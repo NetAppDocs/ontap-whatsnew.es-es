@@ -1,0 +1,84 @@
+---
+sidebar: sidebar 
+permalink: ontap991fo_technical_resources.html 
+keywords:  
+summary:  
+---
+= Recursos técnicos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+En esta sección se tratan los recursos técnicos disponibles que detallan las características mencionadas en este documento.
+
+
+
+== Informes técnicos
+
+* TR-4067: Prácticas recomendadas y guía de implementación de ONTAP NFS de NetApp
++
+https://www.netapp.com/us/media/tr-4067.pdf["https://www.netapp.com/us/media/tr-4067.pdf"^]
+
+* TR-4515: Sistemas de cabinas All SAN de ONTAP AFF
++
+https://www.netapp.com/pdf.html?item=/media/10379-tr4515pdf.pdf["https://www.netapp.com/pdf.html?item=/media/10379-tr4515pdf.pdf"^]
+
+* TR-4526: Almacenamiento WORM conforme a la normativa con SnapLock de NetApp
++
+https://www.netapp.com/pdf.html?item=/media/6158-tr4526pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6158-tr4526pdf.pdf"^]
+
+* TR-4569: Guía sobre la seguridad reforzada de ONTAP 9
++
+https://www.netapp.com/pdf.html?item=/media/10674-tr4569pdf.pdf["https://www.netapp.com/pdf.html?item=/media/10674-tr4569pdf.pdf"^]
+
+* TR-4571: Mejores prácticas para FlexGroup Volumes de NetApp
++
+https://www.netapp.com/us/media/tr-4571.pdf["https://www.netapp.com/us/media/tr-4571.pdf"^]
+
+* TR-4597: VMware vSphere con ONTAP
++
+https://www.netapp.com/us/media/tr-4597.pdf["https://www.netapp.com/us/media/tr-4597.pdf"^]
+
+* TR-4598: Mejores prácticas de FabricPool
++
+https://www.netapp.com/us/media/tr-4598.pdf["https://www.netapp.com/us/media/tr-4598.pdf"^]
+
+* TR-4684: Implementación y configuración de San modernas con NVMe/FC
++
+https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf["https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf"^]
+
+* TR-4678: Protección de datos y backup - volúmenes de FlexGroup
++
+https://www.netapp.com/us/media/tr-4678.pdf["https://www.netapp.com/us/media/tr-4678.pdf"^]
+
+* TR-4689: Arquitectura y diseño de la solución IP de MetroCluster
++
+https://www.netapp.com/us/media/tr-4689.pdf["https://www.netapp.com/us/media/tr-4689.pdf"^]
+
+* TR-4705: Arquitectura y diseño de la solución MetroCluster de NetApp
++
+https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf["https://www.netapp.com/pdf.html?item=/media/13480-tr4705pdf.pdf"^]
+
+* TR-4743: FlexCache en ONTAP
++
+https://www.netapp.com/pdf.html?item=/media/7336-tr4743pdf.pdf["https://www.netapp.com/pdf.html?item=/media/7336-tr4743pdf.pdf"^]
+
+* TR-4814: S3 en prácticas recomendadas de ONTAP
++
+https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf["https://www.netapp.com/pdf.html?item=/media/17219-tr4814pdf.pdf"^]
+
+
+
+
+
+== Podcasts
+
+* Podcast de Tech OnTap, episodio 288: Administrador del sistema ONTAP 9.9.1
++
+https://soundcloud.com/techontap_podcast/episode-288-ontap-system-manager-991["https://soundcloud.com/techontap_podcast/episode-288-ontap-system-manager-991"^]
+
+

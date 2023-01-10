@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: ontap98fo_storage_efficiencies.html 
+keywords: FabricPool, Compression, FlexClone, Snapshot, compaction, deduplication, 
+summary: Esta página describe las eficiencias del almacenamiento de ONTAP 9.8, especialmente las de compresión y las asociadas con la tecnología FabricPool de NetApp. 
+---
+= Eficiencias del almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Las eficiencias del almacenamiento incluyen cualquier función que reduce la cantidad de capacidad física que almacenan los datos en un sistema de almacenamiento. En ONTAP, estos incluyen lo siguiente:
+
+* Compresión de datos
+* Compactación de datos
+* Deduplicación de datos
+* FabricPool de NetApp
+
+
+A veces, estas definiciones se pueden estirar para incluir:
+
+* Tecnología FlexClone de NetApp
+* Copias Snapshot de NetApp
+
+
+Las eficiencias del almacenamiento son vitales para mantener los costes de almacenamiento bajos al reducir la cantidad de hardware físico que necesita adquirir. ONTAP puede realizar la reducción de datos en sistemas en línea (sistemas AFF) o de posprocesamiento (todos los sistemas), con efectos mínimos sobre el rendimiento del sistema.
+
+En ONTAP 9.8, existen varias mejoras disponibles para la eficiencia del almacenamiento.
+
+
+
+== FabricPool
+
+FabricPool es la tecnología de organización en niveles de datos de NetApp, que toma bloques marcados como inactivos en un sistema de archivos y los agrupa en objetos de 4 MB que se envían desde bloques de cloud o S3. La idea es que los datos fríos pueden usar hasta un 80% de la capacidad total de un sistema de almacenamiento; por lo tanto, en lugar de conservar todo esto en el nivel de rendimiento, es mejor moverlo a una solución de almacenamiento de menor coste.
+
+Todo esto ocurre automáticamente en ONTAP a través de políticas de organización en niveles que puede definir y puede averiguar cuántos datos inactivos tiene actualmente en su sistema de almacenamiento mediante los informes de datos inactivos. De ese modo, podrá evaluar si FabricPool realmente ahorrará dinero.
+
+image:ontap98fo_image22.png["Error: Falta la imagen gráfica"]
+
+Cuando un cliente accede a un archivo que se ha organizado en niveles en el cloud, solo los bloques solicitados (no todo el archivo) se vuelven a colocar en el nivel de rendimiento para acceder a ellos.
+
+Para obtener más información sobre FabricPool, consulte https://www.netapp.com/pdf.html?item=/media/17239-tr4598pdf.pdf["TR-4598: Mejores prácticas de FabricPool"] y.. https://soundcloud.com/techontap_podcast/episode-268-netapp-fabricpool-and-s3-in-ontap-98["TR-4598: Prácticas recomendadas de FabricPool y el episodio 268 del podcast de Tech OnTap: FabricPool y S3 de NetApp en ONTAP 9.8"^].
+
+ONTAP 9.8 admite las siguientes funciones de FabricPool:
+
+* *Segmentación desde agregados de HDD.* antes de ONTAP 9.8, FabricPool Tiering a cloud desde ONTAP sólo era posible en agregados SSD. ONTAP 9.8 ahora le permite organizar en niveles el uso de FabricPool desde agregados de HDD.
+* *La organización en niveles en ONTAP S3.* puesto que ahora ONTAP S3 está disponible en general, ahora es posible organizar en niveles desde un sistema ONTAP que utilice FabricPool a un bloque de ONTAP S3. Esto proporciona una forma de reutilizar el almacenamiento de capacidad obsoleta mediante el uso como nivel FabricPool. Además, al organizar en niveles en el mismo clúster, se obtienen tiempos de recuperación más rápidos que traspasar una conexión de red en el cloud.
+* *Mayor período de enfriamiento.* antes de ONTAP 9.8, los datos se marcaban como fríos después de un período de enfriamiento, con un máximo de 63 días. ONTAP 9.8 le permite configurar ese máximo para que pueda llegar a 183 días. Esto resulta útil para los datos a los que se podría acceder de manera esporádica, como los datos a los que se accede trimestralmente, como los informes financieros.
+* *Marcado de objetos.* cuando se organizan por niveles en un proveedor S3 que ofrece políticas de ciclo de vida de la información que administran los datos basados en etiquetas de objetos, ONTAP 9.8 puede etiquetar objetos organizados en niveles mediante FabricPool para incorporarlos a dichas políticas.
+* *Recuperación en la nube.* en algunos casos, es posible que necesite recuperar todos los datos por niveles de la nube. En lugar de tener acceso a todos los datos, ahora puede ejecutar un trabajo que recupera los datos de la nube en ONTAP 9.8.
+
+
+
+
+== Compresión
+
+ONTAP 9.8 introdujo algunos cambios de compresión de datos que ayudan a mejorar el rendimiento, además de mejorar las tasas de reducción de datos en conjuntos de datos comprimibles.
+
+El principal cambio de compresión fue diferenciar los datos en clasificaciones de tipo frío y caliente. Los datos inactivos son aquellos a los que no se ha accedido durante mucho tiempo y los datos activos son aquellos a los que se accede con frecuencia. Esto significa que queremos comprimir datos activos de forma menos agresiva y comprimir datos inactivos más agresivamente.
+
+En ONTAP 9.8, los datos activos se comprimen en línea mediante grupos de compresión de 8K. Además, la deduplicación de datos se produce antes de la compresión para añadir aún más eficiencia a los conjuntos de datos.
+
+A continuación, los datos inactivos se comprimen de nuevo en segundo plano mediante un grupo de compresión de 32 000 más agresivo. Estos cambios suponen un mejor rendimiento para los datos activos y unas mejores tasas de reducción de datos para todos los datos.
+
+link:ontap98fo_data_protection.html["Siguiente: Protección de datos"]

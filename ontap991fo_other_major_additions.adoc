@@ -1,0 +1,83 @@
+---
+sidebar: sidebar 
+permalink: ontap991fo_other_major_additions.html 
+keywords: FlexGroup, S3, NFSv4.2, MAC, 
+summary: Además de las mejoras de System Manager, LAS mejoras SAN y las mejoras de protección de datos, ONTAP 9.9.1 ofrece otros beneficios adicionales. 
+---
+= Otras adiciones importantes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Además de las mejoras de System Manager, LAS mejoras SAN y las mejoras de protección de datos, ONTAP 9.9.1 ofrece otros beneficios adicionales.
+
+
+
+== Contabilidad/cumplimiento del espacio lógico: Volúmenes FlexGroup
+
+Se introdujo la contabilidad del espacio lógico para volúmenes FlexVol en ONTAP 9.4. Permite a los administradores de almacenamiento ocultar el ahorro en eficiencia del almacenamiento, de modo que los usuarios finales puedan evitar la sobreasignación de sus cuotas de almacenamiento designadas.
+
+Por ejemplo, si un usuario escribe 6 TB en un volumen de 10 TB y las eficiencias de almacenamiento ahorran 2 TB, la contabilidad del espacio lógico puede controlar si el usuario ve 6 TB o 4 TB.
+
+image:ontap991fo_image17.png["Error: Falta la imagen gráfica"]
+
+ONTAP 9.5 mejoró esta función y añadió compatibilidad con el cumplimiento de cuotas de FlexVols para dar más control a los administradores del almacenamiento al evitar nuevas escrituras según los umbrales de espacio lógico establecidos. Sin embargo, a los volúmenes FlexGroup les faltaba esta funcionalidad hasta ONTAP 9.9.1.
+
+
+
+== Etiquetas de metadatos definidas por el usuario de ONTAP S3
+
+ONTAP 9.8 introdujo compatibilidad con el protocolo S3 para la funcionalidad básica de almacenamiento de objetos.
+
+Entre la compatibilidad con S3 en ONTAP 9.8 se incluyen las siguientes:
+
+* Acceso básico PARA PUT/GET de objetos (no incluye el acceso a S3 y NAS desde el mismo bloque)
++
+** No es compatible con el etiquetado de objetos ni con la gestión del ciclo de vida de la información; para un uso con una gran diversidad de funciones, distribuido por todo el mundo S3 https://www.netapp.com/data-storage/storagegrid/["StorageGRID de NetApp"^].
+
+
+* Cifrado TLS 1.2
+* Cargas en varias partes
+* Puertos ajustables
+* Varios cubos por volumen
+* Políticas de acceso a bloques
+* S3 como destino FabricPool de NetApp
+
+
+ONTAP 9.9.1 y versiones posteriores ofrecen compatibilidad para el etiquetado de metadatos de objetos cuando se utilizan llamadas ObjectCreate y MultiPartUpload. Cuando SE realiza HEAD o GET en un objeto, los metadatos definidos por el usuario y el recuento del número de etiquetas se devuelven como parte del encabezado HTTP en la respuesta. Estas etiquetas le permiten clasificar mejor los objetos dentro de los bloques ONTAP para obtener una gestión de datos más sólida y son compatibles con aplicaciones que requieren la capacidad de crear metadatos y etiquetas.
+
+Para más información, consulte los siguientes recursos:
+
+* https://soundcloud.com/techontap_podcast/episode-268-netapp-fabricpool-and-s3-in-ontap-98["Podcast de Tech OnTap: Episodio 268: FabricPool y S3 de NetApp en ONTAP 9.8"^]
+* https://www.netapp.com/us/media/tr-4814.pdf["ONTAP S3"^]
+
+
+
+
+== Etiquetas de seguridad NFSv4.2
+
+ONTAP 9.9.1 presenta compatibilidad con la función NFSv4.2 llamada NFS, que es una manera de gestionar el acceso granular a archivos y carpetas gracias a las etiquetas SELinux y al control de acceso obligatorio (MAC). Estas etiquetas MAC se almacenan con archivos y carpetas y funciona junto con permisos de UNIX y ACL de NFSv4.x. La compatibilidad con etiquetado NFS significa que ONTAP ahora reconoce y comprende la configuración de etiqueta SELinux del cliente NFS. Etiquetado como NFS se trata en https://tools.ietf.org/html/rfc7204["RFC-7204"^].
+
+Entre los casos de uso se encuentran los siguientes:
+
+* Etiquetado MAC DE imágenes de máquinas virtuales
+* Clasificación de la seguridad de datos para el sector público (secreto, alto secreto, etc.)
+* Cumplimiento de normativas de seguridad
+* Linux sin disco
+
+
+En esta versión, ONTAP admite los siguientes modos de aplicación:
+
+* https://tools.ietf.org/html/rfc7204["Modo de servidor limitado"^]. ONTAP no puede aplicar las etiquetas, pero puede almacenarlas y transmitirlas.
++
+** La posibilidad de cambiar las etiquetas MAC también depende del cliente para exigir la aplicación.
+
+
+* https://tools.ietf.org/html/rfc7204["Modo invitado"^]. Si el cliente no tiene el rótulo NFS-aware (v4.1 o inferior), las etiquetas MAC no se transmiten.
+
+
+ONTAP no es compatible actualmente https://tools.ietf.org/html/rfc7204["Modo completo"^] (Almacenamiento y aplicación de etiquetas MAC).

@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: ontap98fo_netapp_ontap.html 
+keywords: TR-4872, 4872, introduction, NAS, SAN, NFS, SMB, S3, HA 
+summary: Esta página presenta una descripción general de las últimas funciones de ONTAP 9.8 y enlaces a más información. 
+---
+= TR-4872: Información general sobre las funciones de ONTAP 9.8 de NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Justin Parisi, NetApp
+
+ONTAP de NetApp es el software para la gestión de datos líder del sector de NetApp que le permite gestionar y proteger sus datos sin problemas donde residan, ya sea en las instalaciones, en el extremo o en el cloud.
+
+ONTAP de NetApp ofrece compatibilidad con las siguientes funciones, todo ello en la misma plataforma:
+
+* Protocolos NAS (NFS y SMB)
+* Protocolos SAN (iSCSI, FCP y NVMe)
+* Acceso a datos S3
+* Protección de datos (tecnologías de copia Snapshot, SnapMirror de NetApp y SnapVault)
+* Eficiencias del almacenamiento (deduplicación, compactación y compresión)
+* Recuperación tras fallos de alta disponibilidad (incluidas recuperaciones tras fallos rápidas para SAN de nivel 1 con cabina All SAN)
+* Compatibilidad con configuraciones all-flash, de unidad giratorio y de disco híbrido
+* Funciones de seguridad (autenticación multifactor, cifrado de volúmenes de NetApp y análisis seguro).
+
+
+Esta no es una lista completa; si incluimos todas las funciones ofrecidas por ONTAP, este documento tendría una longitud de cientos de páginas.
+
+Si quiere más información sobre ONTAP de NetApp, consulte https://www.netapp.com/pdf.html?item=/media/7413-ds-3231.pdf["Hoja de datos del software de gestión de datos ONTAP 9"^] y la https://docs.netapp.com/ontap-9/index.jsp["documentación de productos"^].
+
+Eche un vistazo link:https://tv.netapp.com/detail/video/6211778986001["vídeo"] Desde NetApp Insight 2020, podrá realizar una visita guiada más amplia por los notables avances de ONTAP de NetApp.
+
+link:ontap98fo_simplicity_enhancements.html["Siguiente: Mejoras en simplicidad"]

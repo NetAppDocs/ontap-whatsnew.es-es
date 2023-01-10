@@ -1,0 +1,136 @@
+---
+sidebar: sidebar 
+permalink: ontap991fo_data_protection_enhancements.html 
+keywords: replication, failover, disaster recovery, dr, synchronous, backup, archive 
+summary: En el contexto de este documento, la protección de datos se refiere tanto a la noción de replicación de datos externa como a la de recuperación tras fallos automatizada de la infraestructura de sitios. En esta sección se tratan las últimas mejoras en la protección de datos de ONTAP 9.9.1. 
+---
+= Mejoras en la protección de datos
+:allow-uri-read: 
+
+
+En el contexto de este documento, la protección de datos se refiere tanto a la noción de replicación de datos externa como a la de recuperación tras fallos automatizada de la infraestructura de sitios. En esta sección se tratan las últimas mejoras en la protección de datos de ONTAP 9.9.1.
+
+
+
+== Recuperación transparente de las aplicaciones para SAN con continuidad del negocio de SnapMirror
+
+SnapMirror de NetApp es una tecnología de replicación líder en el sector que se puede aprovechar para diversos casos de uso, como los siguientes:
+
+* Recuperación ante desastres para una recuperación tras fallos rápida en las instalaciones durante una interrupción del servicio y una rápida recuperación de vuelta al centro primario
+* Replicación síncrona para obtener copias de datos de hasta el segundo en un sitio remoto
+* Casos prácticos de backup y archivado (con más copias Snapshot en el destino que en el origen)
+
+
+https://docs.netapp.com/us-en/ontap/smbc/["Continuidad del negocio de SnapMirror en ONTAP"^] Amplía lo que ofrece SnapMirror y proporciona conmutación por error automatizada rápida y sencilla de las relaciones síncronas de SnapMirror para la protección de datos granular a nivel de aplicaciones.
+
+La continuidad empresarial de SnapMirror utiliza un mediador para mantener el quórum entre sitios y evitar situaciones de cerebro dividido en el caso de un fallo del sitio. Ya está disponible una nueva versión de software Mediator de ONTAP (1.2), que admite hasta 10 sistemas ONTAP y automatiza los conmutadores de aplicaciones entre sitios en un plazo de 120 segundos tras un fallo.
+
+image:ontap991fo_image11.png["Error: Falta la imagen gráfica"]
+
+
+
+== MetroCluster sobre IP
+
+El software MetroCluster (MC) de NetApp es una solución que combina el clustering basado en cabinas con replicación síncrona para ofrecer una disponibilidad continua y cero pérdida de datos al coste más bajo. La administración del clúster basado en cabinas es más sencilla, puesto que se eliminan las dependencias y la complejidad que suelen asociarse al clustering basado en hosts.
+
+image:ontap991fo_image12.png["Error: Falta la imagen gráfica"]
+
+MetroCluster duplica de forma inmediata todos los datos de misión crítica transacción por transacción, con lo que proporciona acceso ininterrumpido a las aplicaciones y los datos. A diferencia de las soluciones de replicación de datos convencionales, MetroCluster funciona sin problemas con el entorno del host para ofrecer disponibilidad de datos continua y eliminar, al mismo tiempo, la necesidad de crear y mantener scripts complejos de conmutación al nodo de respaldo.
+
+Con MetroCluster, es posible realizar las siguientes tareas:
+
+* Obtenga protección frente a fallos de hardware, red o instalaciones con una conmutación transparente
+* Elimine los tiempos de inactividad planificados y sin planificar y la gestión de cambios
+* Actualice el hardware y el software sin interrumpir las operaciones
+* Realice puestas en marcha sin scripting ni dependencias de aplicaciones o sistemas operativos complejos
+* Obtenga una disponibilidad continua para VMware, Microsoft, Oracle, SAP o cualquier aplicación crítica
+
+
+MetroCluster de NetApp se ha implementado tradicionalmente con un entorno de administración Fibre Channel, pero las versiones más recientes de ONTAP soportan el uso de redes IP para el entorno de administración. De este modo, no solo se reducen los costes y la complejidad de la infraestructura de conmutación por error del sitio, sino que también se amplía el rango de MetroCluster a aproximadamente 700 km (o 300 mi).
+
+ONTAP 9.9.1 aporta los siguientes avances a MetroCluster.
+
+* El volumen aumentado cuenta a 1600 por par de alta disponibilidad
+* Redes de capa 3 compartidas
++
+** Ya no depende de redes de capa 2 dedicadas
+** ONTAP debe estar directamente conectado al router
+** No admite enrutamiento dinámico
+
+
+* Nodos aumentados por sitio (cuatro por sitio, ocho por clúster)
+
+
+
+
+=== Cuándo elegir MetroCluster frente a SnapMirror Business Continuity
+
+Dado que MetroCluster y la continuidad empresarial de SnapMirror comparten algunos de los mismos conjuntos de funciones (capacidad para aprovechar las redes IP existentes, recuperación tras fallos automatizada, replicación síncrona), la cuestión de “cuándo debo utilizar cada uno” se vuelve más relevante.
+
+La respuesta depende de las siguientes preguntas.
+
+* ¿Cuáles son sus objetivos de nivel de servicio?
+* ¿Qué nivel de granularidad desea que se lleve a cabo una conmutación al respaldo?
+
+
+MetroCluster proporciona conmutación al respaldo automatizada de las infraestructuras para pares de alta disponibilidad y agregados físicos, y admite cargas de trabajo SAN y NAS, mientras que la continuidad empresarial SnapMirror ofrece granularidad a nivel de aplicación sólo para cargas DE TRABAJO SAN.
+
+Para obtener más información sobre MetroCluster sobre IP, consulte https://www.netapp.com/pdf.html?item=/media/13481-tr4689pdf.pdf["Arquitectura y diseño de la solución MetroCluster IP"^].
+
+Para obtener más información sobre la continuidad del negocio de SnapMirror, consulte https://docs.netapp.com/us-en/ontap/smbc/["Continuidad del negocio de SnapMirror en ONTAP"^].
+
+
+
+== Protección de datos de volúmenes FlexGroup
+
+Los volúmenes FlexGroup son la solución NAS de escalado horizontal ONTAP de NetApp que proporciona hasta 20 PB y 400 000 millones de archivos en un espacio de nombres único, al tiempo que ofrece un procesamiento paralelo equilibrado de carga automático de cargas de trabajo de alto consumo para una combinación de capacidad, rendimiento y simplicidad.
+
+image:ontap991fo_image13.png["Error: Falta la imagen gráfica"]
+
+Para obtener más información sobre FlexGroup Volumes, consulte https://www.netapp.com/us/media/tr-4571.pdf["TR-4571: Mejores prácticas para FlexGroup Volumes de NetApp"^].
+
+En ONTAP 9.9.1, los volúmenes de FlexGroup admiten varias configuraciones de protección de datos.
+
+
+
+=== SnapMirror en cascada y de distribución ramificada
+
+Una cascada de SnapMirror permite a un administrador de almacenamiento replicar a varios sitios en serie. Por ejemplo, el sitio A puede replicar el sitio B (en las instalaciones o en el cloud) y el sitio B, a continuación, replicar ese mismo volumen en el sitio C (en las instalaciones o en el cloud).
+
+image:ontap991fo_image14.png["Error: Falta la imagen gráfica"]
+
+Los ventiladores de SnapMirror pueden replicar de un volumen de origen a varios volúmenes de destino. Así, el sitio A puede replicar una FlexGroup de origen en los sitios B y C (en las instalaciones o en el cloud). Esto ofrece más flexibilidad y resiliencia en configuraciones de protección de datos.
+
+image:ontap991fo_image15.png["Error: Falta la imagen gráfica"]
+
+
+
+=== Recuperación ante desastres de la máquina virtual de almacenamiento (SVM-DR)
+
+SVM-DR es una función de ONTAP que le permite replicar no solo los volúmenes de datos en un sitio remoto, sino también los detalles de configuración de SVM, como recursos compartidos CIFS, exportaciones NFS, LIF de datos e incluso los identificadores de archivos NFS para evitar el montaje tras fallos en el centro de recuperación ante desastres.
+
+image:ontap991fo_image16.png["Error: Falta la imagen gráfica"]
+
+ONTAP 9.9.1 aporta compatibilidad para SVM-DR a los volúmenes de FlexGroup con las siguientes limitaciones.
+
+* No admite FabricPool
+* Sin FlexClone
+* Sin fan-out de SnapMirror
+* Sin conversión FlexVol sin repetir la base
+
+
+
+
+== Mejoras de SnapLock
+
+https://www.netapp.com/data-protection/ontap-security/snaplock-compliance/["SnapLock de NetApp"^] Es la solución de replicación de cumplimiento WORM de NetApp. Proporciona protección de datos integrada para cargas de trabajo que deben cumplir directrices normativas como la ley HIPAA, la norma SEC 17a-4(f), FINRA y CFTC, así como los requisitos nacionales de los países de habla alemana (DACH).
+
+SnapLock facilita la integridad y la retención de los datos, lo que permite que los registros electrónicos sean tanto inalterables como rápidamente accesibles. Las funciones de retención de SnapLock están certificadas para cumplir con requisitos estrictos de retención de registros, al igual que abordar un conjunto ampliado de requisitos de retención, como la conservación legal, la retención basada en eventos y el modo de adición de volúmenes.
+
+ONTAP 9.9.1 aporta las siguientes mejoras a SnapLock de NetApp:
+
+* https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-concepts%2FGUID-8A8108CF-499A-46FC-917F-A40FAD68C8D6.html["Eficiencia del almacenamiento"^] Compatibilidad con volúmenes WORM. Compatibilidad con la compactación de datos, la deduplicación entre volúmenes y agregados (solo AFF), la limpieza de segmentos continua y la eficiencia del almacenamiento sensible a las temperaturas.
+* Protección contra ransomware para volúmenes de SnapLock que contienen copias Snapshot de LUN.para obtener más información en SnapLock, consulte https://www.netapp.com/pdf.html?item=/media/6158-tr4526pdf.pdf["Almacenamiento WORM conforme a la normativa con SnapLock de NetApp"^].
+
+
+Para obtener más información sobre SnapLock, consulte https://www.netapp.com/pdf.html?item=/media/6158-tr4526pdf.pdf["Almacenamiento WORM conforme a la normativa con SnapLock de NetApp"^].

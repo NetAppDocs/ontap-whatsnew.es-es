@@ -1,0 +1,190 @@
+---
+sidebar: sidebar 
+permalink: ontap98fo_data_protocols.html 
+keywords: NAS Protocol, NFS, SMB/CIFS, FlexCache Volume, FlexGroup, Async Delete, SAN, Persistent Ports, NVMe/FC, S3 
+summary: En esta página se tratan los protocolos de datos que permiten a los clientes y usuarios finales interactuar con el sistema de almacenamiento de ONTAP para acceder a los datos. 
+---
+= Protocolos de datos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Los protocolos de datos hacen referencia a los métodos en los que clientes y usuarios finales interactúan con el sistema de almacenamiento ONTAP de NetApp para obtener acceso a los datos. ONTAP de NetApp proporciona múltiples interfaces oficialmente compatibles para el acceso a los datos en la misma plataforma de almacenamiento, incluidas las siguientes:
+
+* NAS
+* SAN
+* S3
+
+
+ONTAP 9.8 ofrece un gran número de mejoras en los protocolos de datos de ONTAP.
+
+
+
+== Mejoras en el protocolo NAS
+
+Los protocolos de almacenamiento conectado a la red (NAS) hacen referencia a los métodos de transferencia basados en archivos, como NFS y SMB/CIFS. Las siguientes mejoras se añadieron a ONTAP 9.8 para la compatibilidad con el protocolo NAS, así como funciones que se aplican específicamente a NAS, como volúmenes FlexGroup y FlexCache de NetApp.
+
+
+
+=== Mejoras de NFS
+
+ONTAP 9.8 ofrece las siguientes mejoras de NFS:
+
+* *NFSv4.2.* ofrece compatibilidad básica al protocolo NFSv4.2 y no incluye características NFSv4.2 como el etiquetado. NFSv4.2 se habilita cuando NFSv4.1 está habilitado.
+* *Calidad de servicio (QoS) de Qtree.* proporciona una forma para que los administradores de almacenamiento apliquen los máximos y mínimos de calidad de servicio a qtrees en ONTAP. Actualmente, esto solo está disponible con las API DE REST y la línea de comandos, no incluye compatibilidad con la calidad de servicio adaptativa y es solo NFS.
+
+
+
+
+=== Mejoras de SMB/CIFS
+
+ONTAP 9.8 ofrece las siguientes mejoras de SMB/CIFS:
+
+* *Conexiones DC cifradas en SMB3.* cifrado a través del cable para conexiones SMB DC.
+* *Asignar SID a UID en Set Owner (-map- sid-to- uid-on-set-owner).* esta opción controla si ONTAP asigna el SID de Windows a un UID de UNIX al establecer la propiedad en archivos y carpetas. La opción se agregó para mejorar la experiencia de migración de datos de los clientes que experimentaron una mayor carga en sus servidores de Active Directory. El valor predeterminado es `true`. (Corrija el error https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1153207["1153207"^].)
+* *Establecer los Modebits cuando NFSv4_acl son heredados (-is-heredate-modebits-with-nfsv4acl-enabled)*. Proporciona compatibilidad con la interacción multiprotocolo de NAS cuando se crean archivos SMB en directorios en los que las ACL de NFSv4 han eliminado los valores predeterminados `OWNER@`, `GROUP@`, y. `EVERYONE@` Las ACL, o esas ACL no tienen parámetros de herede establecidos. El valor predeterminado es `false`. (Solución para https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/820848["error 820848"^].)
+
+
+
+
+=== Mejoras en el volumen FlexCache
+
+Los volúmenes FlexCache de NetApp son cachés virtuales dispersas compuestos por volúmenes FlexGroup de NetApp. Estas cachés devuelven un volumen de origen y rellenan los datos en la caché a medida que se solicitan de los clientes para ofrecer un acceso rápido y localizado en el lugar en el que se ejecute ONTAP―, ya sea en el cloud, en el perímetro o en el centro de datos―y así proporcionar un espacio de nombres verdaderamente global.
+
+image:ontap98fo_image19.png["Error: Falta la imagen gráfica"]
+
+Para obtener más información sobre FlexCache Volumes, consulte https://www.netapp.com/pdf.html?item=/media/7336-tr4743pdf.pdf["TR-4743: FlexCache en ONTAP"^].
+
+ONTAP 9.8 ofrece las siguientes mejoras en los volúmenes de FlexCache:
+
+* *Compatibilidad con SMB/CIFS.* FlexCache de NetApp admite ahora el acceso en caché a clientes NFSv3 y SMB, así como el acceso a datos multiprotocolo NAS. FlexCache se puede utilizar para el bloqueo de archivos distribuidos en varios sitios para cargas de trabajo de lectura intensiva.
+* *Mayor proporción de salida de ventilador FlexCache.* ONTAP 9.8 proporciona una relación de salida de ventilador de 100:1. Anteriormente, la relación era 10:1.
+* *Volúmenes FlexCache con origen secundario de SnapMirror.* ahora se pueden conectar volúmenes FlexCache a volúmenes secundarios de SnapMirror, lo que permite descargar las operaciones de lectura de los sistemas de almacenamiento primarios y ofrecer un volumen de origen con una ubicación más geográfica.
+* *Invalidación de caché a nivel de bloque.* en lugar de invalidar archivos completos cuando se desaloja los datos modificados de la caché, ahora sólo se expulsan los bloques que han cambiado. De este modo se ahorra capacidad y carga de tráfico WAN.
+* *Cachés de rellenado previo.* Si tiene un directorio en un volumen que sabe que será accesible con frecuencia, ahora puede prellenar la caché con el contenido de ese directorio para eliminar la latencia del acceso inicial al cliente.
+
+
+
+
+=== Mejoras en el volumen FlexGroup
+
+Los volúmenes FlexGroup son la solución NAS de escalado horizontal ONTAP de NetApp que proporciona hasta 20 PB y 400 000 millones de archivos en un espacio de nombres único, al tiempo que ofrece un procesamiento paralelo equilibrado de carga automático de cargas de trabajo de alto consumo para una combinación de capacidad, rendimiento y simplicidad.
+
+image:ontap98fo_image20.png["Error: Falta la imagen gráfica"]
+
+Para obtener más información sobre FlexGroup Volumes, consulte https://www.netapp.com/us/media/tr-4571.pdf["TR-4571: Mejores prácticas para FlexGroup Volumes de NetApp"^].
+
+ONTAP 9.8 ofrece las siguientes mejoras en los volúmenes de FlexGroup:
+
+* *Compatibilidad con Snapshot 1,023.* los volúmenes FlexGroup de NetApp ahora pueden tener hasta 1,023 copias snapshot por volumen. Con copias Snapshot adicionales, los volúmenes de FlexGroup pueden resultar más viables a medida que se realizan copias de archivado, pueden mantener un mayor número de copias de Snapshot frecuentes y, ahora, pueden admitir conversiones de FlexVol que tienen identificadores de copia de Snapshot superiores a 255.
+* *Mejoras de NDMP.* la compatibilidad con NDMP para volúmenes FlexGroup se agregó en ONTAP 9.7 pero faltaba las siguientes opciones de funcionalidad:
++
+** ONTAP 9.8 incorpora compatibilidad con NDMP
+** EXCLUIR
+** Extensiones de copia de seguridad reiniciables (RBE)
+** MULTI_SUBTREE_NAMES
+** Mejoras en el rendimiento
++
+Para obtener más información sobre FlexGroup Volumes y NDMP, consulte https://www.netapp.com/us/media/tr-4678.pdf["TR-4678: Protección de datos y backup - volúmenes de FlexGroup"^].
+
+
+
+* *Compatibilidad de conversión de FlexGroup para volúmenes de 7MTT.* antes de ONTAP 9.8, no se pudo convertir un FlexVol que se haya realizado la transición de 7-Mode a un volumen FlexGroup. El ONTAP 9.8 levanta esa restricción.
+* *Redimensionamiento proactivo.* el redimensionamiento proactivo es una función de gestión de la capacidad que mantiene un búfer de espacio libre en los volúmenes miembro de FlexGroup para fomentar un rendimiento y una distribución de la capacidad constantes.
+* *Clonado de archivos.* ahora puede clonar archivos en un volumen FlexGroup utilizando VMware vSphere mediante la compatibilidad con la descarga de copias VAAI. Sin embargo, la clonado de archivos con las API DE REST o la interfaz de línea de comandos no se admite actualmente.
+* *Compatibilidad con almacenes de datos VMware.* ahora ONTAP 9.8 tiene soporte oficial para volúmenes FlexGroup como almacenes de datos VMware escalables. Esto significa lo siguiente:
++
+** Rendimiento y colocación validados
+** Calificación Interop
+** Compatibilidad con Virtual Storage Console
+** Compatibilidad con backups SnapCenter de NetApp
+
+
+
+
+
+
+=== Eliminación asincrónica
+
+La eliminación asincrónica permite a los administradores de almacenamiento omitir la latencia de la red mediante la eliminación de directorios de la CLI.
+
+Si alguna vez ha intentado eliminar un directorio con muchos archivos en él a través de NFS o SMB, sabe lo complicado que puede ser. Cada operación debe recorrer la red mediante el protocolo NAS que esté utilizando y, a continuación, ONTAP debe procesar dichas solicitudes y responder. Dependiendo del ancho de banda de red disponible, las especificaciones del cliente o el sistema de almacenamiento, el proceso puede llevar mucho tiempo. La eliminación asincrónica ahorra un tiempo significativo y permite a los clientes volver a trabajar más rápidamente.
+
+Para obtener más información sobre la eliminación asíncrona, consulte https://www.netapp.com/us/media/tr-4571.pdf["TR-4751: Mejores prácticas para FlexGroup Volumes de NetApp"^].
+
+
+
+== Mejoras de SAN
+
+Los protocolos de red de área de almacenamiento (SAN) hacen referencia a métodos de transferencia de datos basados en bloques, como FCP, iSCSI y NVMe over Fibre Channel. Las siguientes mejoras se han agregado a ONTAP 9.8 para la compatibilidad con el protocolo SAN.
+
+
+
+=== Cabina All-SAN (ASA)
+
+ONTAP 9.7 presentó una nueva plataforma SAN dedicada llamada https://www.netapp.com/data-storage/san-storage-area-network/documentation/["ASA"^], Con el objetivo de simplificar las instalaciones SAN de nivel 1 y reducir de forma drástica los tiempos de recuperación tras fallos en entornos SAN, ofreciendo un enfoque activo/activo de la conectividad SAN.
+
+Puede obtener más información sobre ASA en https://www.netapp.com/data-storage/san-storage-area-network/documentation/["Recursos de documentación de la cabina All-SAN"^].
+
+ONTAP 9.8 aporta algunas mejoras a ASA, incluidas las siguientes:
+
+* *Mayores tamaños de volumen de LUN y FlexVol.* las LUN del ASA ahora se pueden aprovisionar a 128 TB; los volúmenes FlexVol pueden ser de 300 TB.
+* *Soporte MetroCluster a través de IP.* ahora se puede utilizar ASA para recuperaciones tras fallos en sitios a través de redes IP.
+* *Compatibilidad con la continuidad empresarial de SnapMirror (SM-BC).* ASA se puede utilizar con la continuidad empresarial de SnapMirror. xref
+* *Ampliación del ecosistema del host.* Soporte de HP-UX, Solaris y AIX. Consulte https://mysupport.netapp.com/matrix/["Matriz de interoperabilidad"^] para obtener más detalles.
+* *Soporte para las plataformas A800 y A250.*
+* *Aprovisionamiento simplificado en System Manager.*
+
+
+
+
+=== Puertos persistentes
+
+ASA añade una mejora llamada puertos persistentes para mejorar los tiempos de conmutación al nodo de respaldo. Los puertos persistentes de ONTAP ofrecen mucha más resiliencia y un acceso a datos continuo para hosts SAN que se conectan a un ASA. Cada nodo del ASA mantiene LIF de fibra de canal de sombra. Esta funcionalidad es clave para cómo ONTAP 9.8 reduce aún más el tiempo DE conmutación por error SAN en ASA. Estos LIF mantienen los mismos ID de las LIF del partner, pero permanecen en modo de espera. Si hay una conmutación al respaldo y un LIF de FC debe migrar al nodo del compañero, entonces, en lugar de cambiar los identificadores (que pueden aumentar los tiempos de conmutación por error mientras el host negocia ese cambio), el LIF en sombra se convierte en la nueva ruta. El host continúa con las operaciones de I/o en la misma ruta, con el mismo ID, sin notificación de enlace inactivo y sin necesidad de configuración adicional.
+
+En la siguiente figura, se proporciona un ejemplo de conmutación por error para puertos persistentes.
+
+image:ontap98fo_image21.png["Error: Falta la imagen gráfica"]
+
+
+
+=== NVMe/FC
+
+NVMe es un nuevo protocolo SAN que ayuda a mejorar la latencia y el rendimiento con las cargas de trabajo de bloques sobre los sistemas FCP e iSCSI tradicionales.
+
+Este blog lo cubre muy bien: https://blog.netapp.com/nvme-over-fabric/["Cuando implementa NVMe over Fabrics, el tejido tiene gran importancia"^].
+
+NetApp introdujo la compatibilidad con NVMe over Fibre Channel en ONTAP 9.4 y ha agregado mejoras en las funciones en cada versión. ONTAP 9.8 añade lo siguiente:
+
+* *NVMe/FC en la misma SVM con FCP e iSCSI.* ahora puede utilizar NVMe/FC en los mismos SVM que sus otros protocolos SAN, lo que simplifica la gestión de sus entornos SAN.
+* *Compatibilidad con la estructura de conmutador SAN Gen 7.* esta función añade compatibilidad con los nuevos conmutadores SAN Gen-7.
+
+
+
+
+== Mejoras de S3
+
+El almacenamiento de objetos con el protocolo S3 es la adición más reciente a la familia de protocolos ONTAP. Cuando se añade como vista previa pública en ONTAP 9.7, S3 ahora es un protocolo totalmente compatible con ONTAP 9.8.
+
+La compatibilidad con S3 incluye lo siguiente:
+
+* Acceso básico PARA PUT/GET de objetos (no incluye el acceso a S3 y NAS desde el mismo bloque)
++
+** No es compatible con el etiquetado de objetos ni con la gestión del ciclo de vida de la información; para un uso con una gran diversidad de funciones, distribuido por todo el mundo S3 https://www.netapp.com/data-storage/storagegrid/["StorageGRID de NetApp"^].
+
+
+* Cifrado TLS 1.2
+* Cargas en varias partes
+* Puertos ajustables
+* Varios cubos por volumen
+* Políticas de acceso a bloques
+* S3 como targetde FabricPool de NetApp para obtener más información, consulte los siguientes recursos:
+* https://soundcloud.com/techontap_podcast/episode-268-netapp-fabricpool-and-s3-in-ontap-98["Podcast de Tech OnTap: Episodio 268: FabricPool y S3 de NetApp en ONTAP 9.8"^]
+* https://www.netapp.com/us/media/tr-4814.pdf["ONTAP S3"^]
+
+
+link:ontap98fo_storage_efficiencies.html["Siguiente: Eficiencias del almacenamiento"]

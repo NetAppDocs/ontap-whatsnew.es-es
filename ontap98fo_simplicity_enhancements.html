@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head class="at-element-marker">
+  <title>Mejoras en la simplicidad</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Mejoras en la simplicidad" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/es-es/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" />
+	<meta property="og:description" content="Esta página trata las mejoras de ONTAP 9.8 que mejoran la sencillez, incluidas las actualizaciones de ONTAP System Manager, las mejoras en las actualizacione..." />
+  <meta property="og:image" content="https://docs.netapp.com/es-es/ontap-whatsnew/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Esta página trata las mejoras de ONTAP 9.8 que mejoran la sencillez, incluidas las actualizaciones de ONTAP System Manager, las mejoras en las actualizacione...">
+  <meta name="keywords" content=" System Manager, Health, Alerts, Capacity Views, Network Visualization, Performance Views, File System Analytics, FSA, Active NFS Clients, upgrade"><!-- Icons -->
+  <link rel="icon" href="/es-es/ontap-whatsnew/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/es-es/ontap-whatsnew/css/netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/es-es/ontap-whatsnew/css/landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/es-es/ontap-whatsnew/css/tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel='stylesheet' href='/es-es/ontap-whatsnew/css/na-feature.css' type='text/css'><!-- Top level site integrations --><script>
+    function addAdobeLaunch(adobeId) {
+      var head = document.getElementsByTagName('head')[0];
+      var adobe = document.createElement("script");
+      adobe.type = "text/plain";
+      adobe.className = "optanon-category-C0002";
+      adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/"+adobeId+".min.js";
+      head.appendChild(adobe);
+    }
+
+    function addGoogleAnalytics(gtagId) {
+      var google = document.createElement("script");
+      google.type = "text/plain";
+      google.className = "optanon-category-C0002";
+      google.src = "https://www.googletagmanager.com/gtag/js?id="+gtagId;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(google);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtagId);
+    }
+
+    function addConsent(consentId) {
+      var head = document.getElementsByTagName('head')[0];
+      var onetrustConsent = document.createElement("script");
+      onetrustConsent.type = "text/javascript";
+      onetrustConsent.src = "https://cdn.cookielaw.org/consent/"+consentId+"/OtAutoBlock.js";
+      head.appendChild(onetrustConsent);
+
+      var onetrustScript = document.createElement("script");
+      onetrustScript.type = "text/javascript";
+      onetrustScript.src = "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js";
+      onetrustScript.charset = "UTF-8";
+      onetrustScript.dataset.documentLanguage = "true";
+      onetrustScript.dataset.domainScript = consentId;
+      head.appendChild(onetrustScript);
+    }addConsent("72570c5c-fe30-465f-b0e0-b77f7fb4ae34");
+    addAdobeLaunch("launch-e9ff3acac59f");
+    addGoogleAnalytics("UA-81697994-3");function OptanonWrapper() { }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/es-es/ontap-whatsnew/js/na-search.js'></script><script src='/es-es/ontap-whatsnew/js/na-pagenav.js'></script><script src='/es-es/ontap-whatsnew/js/na-utility.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/clouddocs.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/es-es/ontap-whatsnew/js/toc.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/customscripts.js'></script><script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+          $(".sidebar-nav-container").on("scroll", function() {
+            $.cookie("sidebarScroll", $(".sidebar-nav-container").scrollTop(), {
+              path    : "/es-es/ontap-whatsnew"  
+            });
+          });
+          $(function() {
+            if ($.cookie("sidebarScroll")) {
+              $(".sidebar-nav-container").scrollTop($.cookie("sidebarScroll"));
+            }
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script>
+  <script src='/es-es/ontap-whatsnew/js/custom-dropdown.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/FileSaver.min.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/jszip-utils.min.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/jszip.min.js'></script>
+  <script src='/es-es/ontap-whatsnew/js/pdf-ux.js'></script>
+</head>
+
+
+  <body class role="document" data-flavor="">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  
+  <!-- Start Page Toolbar -->
+  
+  <div class="page-nav-toolbar"><div class="page-nav-contribute"><a target="_blank" href="https://github.com/NetAppDocs/ontap-whatsnew/issues/new?body=Page%3A%20[Mejoras en la simplicidad](https://docs.netapp.com/es-es/ontap-whatsnew/ontap98fo_simplicity_enhancements.html)&template=public-issue-template.md" class="page-nav-contribute-link" role="button"><img src="/es-es/ontap-whatsnew/images/discuss-sm.svg" alt="" class="github-icon" />Solicitar cambios en el documento</a><a target="_blank" href="https://github.com/NetAppDocs/ontap-whatsnew/blob/main/ontap98fo_simplicity_enhancements.adoc" class="page-nav-contribute-link" role="button"><img src="/es-es/ontap-whatsnew/images/edit-sm.svg" alt="" class="github-icon" />Editar en GitHub</a><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/es-es/ontap-whatsnew/images/article-sm.svg" alt="" class="github-icon" />Guía del colaborador</a></div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">EN ESTA PÁGINA</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">Producto y soluciones</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">Asistencia y capacitación</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">Cloud Central</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">Comunidad</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">Blog</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">Historias de clientes</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/company/contact-us/" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" 
+          data-search-html="/es-es/ontap-whatsnew/search.html"
+          data-type="widget" 
+          data-placeholder="Buscar documentación"
+          data-no-results-found="No se encontraron resultados para {query}"
+          data-did-you-mean="Buscar {suggestion}."
+          data-no-results-found-did-you-mean="No se encontraron resultados para {query}. ¿Quiso decir {suggestion}?"
+          data-results-found="{hitCount} resultados encontrados"
+          data-error-message="We're sorry, an issue occurred when fetching your results. Please try again."
+          data-error-reset="Reset Search"
+          data-sk-es-pf-indexes=""
+          data-flavor=""></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar">
+    <!-- Start Language Selector --><div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+      <div class="custom-dropdown-select custom-dropdown-select-lang">
+      <span class="lang-name">Español</span>
+          <svg class="n-globe__icon" aria-labelledby="title">
+            <title>globe</title>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#globe"></use>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="custom-dropdown-menu"><li>
+          <a href="https://docs.netapp.com/es-es/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">Español</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/us-en/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">English</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ja-jp/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ko-kr/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-cn/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-tw/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/de-de/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/fr-fr/ontap-whatsnew/ontap98fo_simplicity_enhancements.html" target="_self"><span translate="no" class="notranslate">Français</span></a>
+        </li></ul>
+    </div><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <!-- End property bar -->
+</header>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" id="sidebar-height">
+      <button id="btn-sidebar-collapse" onclick="hideSidebar()"><img src="/es-es/ontap-whatsnew/images/collapse.png" alt="Contraer panel de navegación"></button>
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+    <img src="/es-es/ontap-whatsnew/images/pdf.png" alt="" width="16" height="16"/>PDFs disponibles<span>
+    </span>
+  </a>
+</div>
+<div class="n-pdf-body-container">
+  <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+        
+        
+        
+        <a target="_blank" href="/es-es/ontap-whatsnew/pdfs/fullsite-sidebar/TR_4894__Información_general_sobre_las_funciones_de_ONTAP_9_9_1_de_NetApp.pdf" >
+          <img src="/es-es/ontap-whatsnew/images/pdf.png" alt="" width="16" height="16"/>PDF de este sitio de documentos</a>
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/ontap-whatsnew/pdfs/sidebar/Descripción_general_de_las_funciones_de_ONTAP_9_9_1_de_NetApp.pdf" 
+            
+          >
+            <img src="/es-es/ontap-whatsnew/images/pdf.png" alt="" width="16" height="16"/>
+            Descripción general de las funciones de ONTAP 9.9.1 de NetApp
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/ontap-whatsnew/pdfs/sidebar/Descripción_general_de_las_funciones_de_ONTAP_9_8_de_NetApp.pdf" 
+            
+          >
+            <img src="/es-es/ontap-whatsnew/images/pdf.png" alt="" width="16" height="16"/>
+            Descripción general de las funciones de ONTAP 9.8 de NetApp
+          </a>
+          
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+</li></ul>
+  <div class="zip-pdf-link-container" style="display: none;">   
+    <a href="#" id="zipPdf">
+      <img src="/es-es/ontap-whatsnew/images/pdf-zip.png" alt="" width="16" height="16"/>
+      <pre>Colección de documentos PDF separados<span class="zip-size"></span></pre>
+    </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+</div>
+<script>
+  $("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+  });
+</script><div class="sidebar-nav-container" id="mysidebardiv">
+  <ul id="mysidebar" class="nav"><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de las funciones de ONTAP 9.9.1 de NetApp"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="/es-es/ontap-whatsnew/index.html">
+        <div class="na-navbar-padding"> Descripción general de las funciones de ONTAP 9.9.1 de NetApp</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Mejoras de System Manager"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap991fo_system_manager_enhancements.html">
+        Mejoras de System Manager
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Mejoras DE SAN"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap991fo_san_enhancements.html">
+        Mejoras DE SAN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Mejoras en la protección de datos"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap991fo_data_protection_enhancements.html">
+        Mejoras en la protección de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Otras adiciones importantes"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap991fo_other_major_additions.html">
+        Otras adiciones importantes
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recursos técnicos"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap991fo_technical_resources.html">
+        Recursos técnicos
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de las funciones de ONTAP 9.8 de NetApp"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="/es-es/ontap-whatsnew/ontap98fo_netapp_ontap.html">
+        <div class="na-navbar-padding"> Descripción general de las funciones de ONTAP 9.8 de NetApp</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Mejoras en la simplicidad"
+      data-li-level="2#" 
+      class="  active "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_simplicity_enhancements.html">
+        Mejoras en la simplicidad
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Protocolos de datos"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_data_protocols.html">
+        Protocolos de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Eficiencias del almacenamiento"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_storage_efficiencies.html">
+        Eficiencias del almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Protección de datos"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_data_protection.html">
+        Protección de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Virtualización de VMware"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_vmware_virtualization.html">
+        Virtualización de VMware
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recursos técnicos"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/ontap-whatsnew/ontap98fo_technical_resources.html">
+        Recursos técnicos
+      </a></li></ul></li></ul>
+</div>
+<script>
+  window.onscroll = () => {
+    const value = -40 - (document.body.scrollHeight - (window.innerHeight + document.scrollingElement.scrollTop));
+    
+    document.getElementById("sidebar-height").style.bottom = Math.max(0,value) + "px";
+};
+</script>
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+<script>$("#mysidebar li.active").parents('ul').css("display","block");</script>
+
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <div class="ie-utility">
+  <button id="btn-sidebar-expand" onclick="showSidebar()"><img src="/es-es/ontap-whatsnew/images/expand.png" alt="Expandir panel de navegación"></button>
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">docs.netapp.com</a>
+        </li>
+        
+
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/es-es/ontap-whatsnew/">ONTAP&nbsp;What's&nbsp;New</a>
+        </li>
+
+      </ul>
+    </div>
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+      <div class="ie-nmt-disclaimer">
+  <span>
+    <div class="ie-nmt-disclaimer-container">
+      <div class="ie-nmt-disclaimer-icon">
+        <svg class="luci-icon" aria-hidden="true">
+          <use xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#circle-info">
+        </svg>
+      </div>
+      <div class="ie-nmt-disclaimer-content">
+        <span> Se proporciona el idioma español mediante traducción automática para su comodidad. En caso de alguna inconsistencia, el inglés precede al español. </span>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </span>
+</div><div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">Mejoras en la simplicidad</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2023-02-20 20:12:01 +0000">02/20/2023</time>
+    
+  
+
+<span>Colaboradores
+</span>
+
+
+</p>
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>En esta sección se tratan las mejoras de ONTAP 9.8 que mejoran la sencillez. Esto incluye lo siguiente:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Actualizaciones del administrador del sistema de ONTAP</p>
+</li>
+<li>
+<p>Mejoras en la actualización y la actualización tecnológica de ONTAP</p>
+</li>
+<li>
+<p>Mejoras en la API de REST</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mejoras-de-system-manager">Mejoras de System Manager</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ONTAP 9.7 introdujo una renovación de la interfaz gráfica de usuario de System Manager con la intención de simplificar la forma en que los administradores gestionan las operaciones básicas de ONTAP, como el aprovisionamiento de almacenamiento y las operaciones cotidianas. La nueva interfaz gráfica de usuario también utiliza las API DE REST, que se añadieron en ONTAP 9.6. En ONTAP 9.8, se ha eliminado la vista clásica de System Manager.</p>
+</div>
+<div class="paragraph">
+<p>Una de las principales diferencias entre las interfaces es la consola, que es la primera página a la que se llega cuando se inicia sesión por primera vez en ONTAP System Manager de NetApp.</p>
+</div>
+<div class="paragraph">
+<p>Los siguientes gráficos muestran una comparación en paralelo de las versiones clásica y nueva de la consola de System Manager.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image1.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Cuando miramos más de cerca, podemos ver algunas diferencias importantes.</p>
+</div>
+<div class="sect2">
+<h3 id="estadoalertas">Estado/Alertas</h3>
+<div class="paragraph">
+<p>Cuando se inicia sesión por primera vez en Classic System Manager, la esquina superior izquierda tiene una lista de errores de clúster y nodo. Estos se resumen en enlaces clickable. Al hacer clic en uno de los enlaces, se le redirigirá a otra página de System Manager.</p>
+</div>
+<div class="paragraph">
+<p>También tenía un área separada que muestra el estado de alta disponibilidad del clúster para ver si un nodo se ha producido una conmutación al nodo de respaldo. En las siguientes imágenes, vemos la vista del tablero y lo que vemos cuando hacemos clic en uno de los enlaces―en este caso, nuestros discos fallidos.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image2.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Para ver otras alertas, debe volver a la consola, lo que requiere tiempo y clics adicionales. Uno de los objetivos de la nueva vista de System Manager es simplificar este proceso.</p>
+</div>
+<div class="paragraph">
+<p>La siguiente figura muestra la nueva consola de System Manager. Las dos diferencias principales entre las vistas de estado y alerta son que ahora tenemos el estado de alta disponibilidad del nodo y las alertas en la misma ventana y, en lugar de hacer clic fuera del panel principal, las alertas se encuentran ahora en un cuadro desplegable.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image3.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vistas-de-capacidad">Vistas de capacidad</h3>
+<div class="paragraph">
+<p>También se reducen los clics adicionales para ver más capacidad. En el clásico System Manager de ONTAP, las tasas de eficiencia del almacenamiento y de capacidad se encontraron en Información general del clúster, con pestañas para hacer clic en él para encontrar información. La nueva vista de System Manager consolida la tasa de eficiencia del almacenamiento y las vistas de capacidad en un único gráfico.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/ontap-whatsnew/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+La nueva interfaz de usuario aprovecha el espacio lógico usado y el espacio físico disponible.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image4.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Las vistas de protección de datos se han movido a su propio panel de protección, y Esta página ofrece aspectos más profundos y granulares de la protección de datos en el clúster y también ofrece una ubicación para aprovechar la nueva continuidad de negocio de SnapMirror (SM-BC).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image5.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="visualización-de-red">Visualización de red</h3>
+<div class="paragraph">
+<p>El Administrador del sistema ONTAP 9.8 también elimina la vista aplicación y objetos a favor de una nueva vista de visualización de red que muestra la topología de red del clúster, así como las X rojas cuando un puerto está inactivo.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image6.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vistas-de-rendimiento">Vistas de rendimiento</h3>
+<div class="paragraph">
+<p>Los gráficos de datos de rendimiento de System Manager ahora conservan los datos del clúster hasta 1 año en lugar de los datos de rendimiento clásicos de System Manager solo están disponibles mientras inicia sesión. En System Manager 9.8 de ONTAP, ahora puede hacer clic en la hora, el día, la semana, el mes o el año. También existe una forma de descargar los datos de rendimiento en un volumen compartido en clúster.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image7.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="análisis-del-sistema-de-archivos">Análisis del sistema de archivos</h3>
+<div class="paragraph">
+<p>En entornos con un gran número de archivos, intentar encontrar información acerca de la capacidad de carpetas, la antigüedad de los datos y el número de archivos suele requerir comandos o scripts con un gran consumo de tiempo que ejecutan operaciones en serie a través de protocolos NAS, como <code>ls</code>, <code>du</code>, <code>find</code>, y. <code>stat</code>.</p>
+</div>
+<div class="paragraph">
+<p>System Manager 9.8 de ONTAP permite a los administradores localizar la información del sistema de archivos en cualquier volumen de almacenamiento NAS de forma rápida y sencilla, gracias a la habilitación de un escáner de bajo impacto para cada volumen. Este escáner rastreará el sistema de archivos de ONTAP en segundo plano con un trabajo de baja prioridad y proporcionará una gran cantidad de información disponible tan pronto como navegue hasta un volumen en System Manager 9.8 o posterior.</p>
+</div>
+<div class="paragraph">
+<p>Habilitar el análisis de sistemas de archivos es tan sencillo como navegar hasta el volumen que desea analizar. Vaya a almacenamiento &gt; volúmenes y utilice la búsqueda para encontrar el volumen que desea. Haga clic en el volumen y, a continuación, en la ficha Explorador.</p>
+</div>
+<div class="paragraph">
+<p>Desde aquí, verá el enlace Habilitar análisis en la parte derecha de la página.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image8.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Después de hacer clic en Activar, se inicia el escáner. El tiempo de finalización depende de la cantidad de objetos del volumen y de la carga del sistema. Una vez que haya terminado, verá toda la estructura de directorio llena en la vista de System Manager. Esta vista se puede navegar por el árbol de directorios y proporciona acceso a información del historial, información del tamaño de directorio y tamaños de archivo.</p>
+</div>
+<div class="paragraph">
+<p>En la siguiente figura se muestran vistas del volumen Tech_ONTAP de mi clúster, para el que se usa como archivado <a href="http://techontappodcast.com/" target="_blank" rel="noopener">"Episodios del podcast Tech OnTap de NetApp"</a>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image9.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Al hacer clic en una carpeta, aparece una lista de archivos en la parte derecha de la página.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image10.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Si lo elige, puede habilitar Mostrar hora a la que se accedió para obtener una mirada en la última vez que se accedió a un archivo.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image11.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>En la parte inferior de la página, puede ver cuántos datos no se han accedido en un año, así como el directorio y el archivo cuenta en esa carpeta.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image12.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Además de ser capaz de encontrar rápidamente información sobre el directorio y el tamaño de los archivos, esta función también proporciona información útil para decidir si la tecnología FabricPool de NetApp sería efectiva para reducir la cantidad de datos inactivos que ocupan espacio en sus agregados.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clientes-nfs-activos">Clientes NFS activos</h3>
+<div class="paragraph">
+<p>ONTAP 9.7 introdujo una forma de ver a qué clientes NFS accedían a volúmenes específicos de un clúster, así como qué direcciones IP de LIF de datos estaban en uso con el <code>nfs connected-clients</code> comando. Este comando se trata de forma detallada en la <a href="https://www.netapp.com/us/media/tr-4067.pdf" target="_blank" rel="noopener">"TR-4067: Prácticas recomendadas y guía de implementación de ONTAP NFS de NetApp"</a>. Este comando es útil en situaciones en las que necesita averiguar qué clientes están conectados al sistema de almacenamiento, como actualizaciones, mejoras tecnológicas o informes simples.</p>
+</div>
+<div class="paragraph">
+<p>System Manager 9.8 de ONTAP ofrece una forma de ver estos clientes con la GUI, así como una forma de exportar la lista a un archivo .csv. Desplácese hasta hosts &gt; NFS Clients y vea una lista de clientes NFS que han estado activos en las últimas 48 horas.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image13.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="otras-mejoras-de-system-manager-9-8">Otras mejoras de System Manager 9.8</h3>
+<div class="paragraph">
+<p>ONTAP 9.8 también incorpora las siguientes mejoras a System Manager:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Seguimiento de seguridad de archivos NAS (seguimiento del acceso a los archivos para solucionar problemas de permisos)</p>
+</li>
+<li>
+<p>Configuración del banner de inicio de sesión (banner que muestra al iniciar sesión)</p>
+</li>
+<li>
+<p>Configuración de MetroCluster</p>
+</li>
+<li>
+<p>Nivel de registro (ajuste el nivel de registro que se ha realizado en el clúster)</p>
+</li>
+<li>
+<p>Configuración de SAML</p>
+</li>
+<li>
+<p>Gestión de claves incorporada</p>
+</li>
+<li>
+<p>Subsistema NVMe</p>
+</li>
+<li>
+<p>Aprovisionamiento de agregados y expansión de capacidad automáticas</p>
+</li>
+<li>
+<p>Compatibilidad con API DE REST para la carga de imágenes de ONTAP</p>
+</li>
+<li>
+<p>Ubicación de puertos automática</p>
+</li>
+<li>
+<p>Restauración de SnapMirror y resincronización inversa</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Asignación de discos</p>
+</li>
+<li>
+<p>Mejoras de FabricPool (políticas de organización en niveles y etiquetado de objetos)</p>
+</li>
+<li>
+<p>Adición de nodos al clúster</p>
+</li>
+<li>
+<p>Actualización directa sin interrupciones a versiones de ONTAP de n+2 (plazo de 2 años)</p>
+</li>
+<li>
+<p>Vistas de rendimiento por protocolo</p>
+</li>
+<li>
+<p>Gestión del protocolo S3</p>
+</li>
+<li>
+<p>Varios LUN en el mismo volumen</p>
+</li>
+<li>
+<p>Se mueven varias LUN</p>
+</li>
+<li>
+<p>Actualizaciones de firmware con un solo clic</p>
+</li>
+<li>
+<p>Soporte de continuidad del negocio de SnapMirror</p>
+</li>
+<li>
+<p>Políticas de eficiencia de almacenamiento</p>
+</li>
+<li>
+<p>Mejoras de gestión de volúmenes</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>En la siguiente figura se muestran las actualizaciones de firmware de MetroCluster y de un solo clic.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image14.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mejoras-en-la-api-de-rest">Mejoras en la API de REST</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La compatibilidad con API DE REST, añadida en ONTAP 9.6, permite a los administradores del almacenamiento aprovechar las llamadas API estándar del sector al almacenamiento de ONTAP en sus scripts de automatización sin tener que interactuar con la CLI o la GUI.</p>
+</div>
+<div class="paragraph">
+<p>Con System Manager, existen muestras y documentación de la API DE REST. Solo tiene que ir a la interfaz de gestión del clúster desde un navegador web y añadir <code>docs/api</code> A la dirección (mediante HTTPS).</p>
+</div>
+<div class="paragraph">
+<p>Por ejemplo:</p>
+</div>
+<div class="paragraph">
+<p><code><a href="https://cluster/docs/api" class="bare">https://cluster/docs/api</a></code></p>
+</div>
+<div class="paragraph">
+<p>Esta página proporciona un glosario interactivo de API DE REST disponibles, así como un método para generar sus propias consultas de API DE REST.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image15.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>En ONTAP 9.8, las API DE REST se comentarán ahora con qué versión se han añadido, lo que contribuye a simplificar la vida cuando se intenta mantener las secuencias de comandos funcionando en varias versiones de ONTAP.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image16.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>En la siguiente tabla se proporciona una lista de las nuevas API DE REST en ONTAP 9.8.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Cluster</strong> * Historial de firmware * licencias de clúster – agrupaciones de capacidad * licencias de clúster – gestores de licencias * indicadores de nodo * carga de imagen de software <strong>MetroCluster</strong> * Mediador * Diagnóstico * Gestión/creación * grupos DR * interconexiones * nodos * Operaciones * redes* * indicadores de puerto Ethernet * Información de puerto de conmutador * conmutador Información * Métricas de interfaz FC * grupos de pares BGP * métricas de interfaz IP * políticas de servicio de LIF * métricas DE SAN* * NVMe</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seguridad</strong> * modo FIPS habilitar/deshabilitar * Habilitar/deshabilitar el cifrado de datos * Vaults de Azure Key * Google GCP-KMS * seg IP * almacenamiento* * copia/movimiento de archivos * PARCHE/modificación de FlexCache® de NetApp * Archivos supervisados * políticas de Snapshot * políticas de eficiencia del almacenamiento * Administración de archivos y directorios (eliminación asincrónica, QoS y análisis de sistemas de archivos) <strong>NAS</strong> * Redirección de registro de auditoría * sesiones CIFS * seguimiento de acceso a archivos/rastreo de seguridad <strong>gestionar</strong> * resolución de eventos <strong>almacén de objetos/S3</strong> * Gestión de bloques S3 * grupos S3 * políticas S3</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Para obtener más información acerca de las actualizaciones de System Manager en ONTAP 9.8, consulte <a href="https://soundcloud.com/techontap_podcast/episode-266-netapp-system-manager-98" target="_blank" rel="noopener">"Podcast de Tech OnTap, episodio 266: ONTAP System Manager 9.8 de NetApp"</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mejoras-en-actualizaciones-y-mejoras-tecnológicas-ontap-9-8">Mejoras en actualizaciones y mejoras tecnológicas: ONTAP 9.8</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tradicionalmente, las actualizaciones de ONTAP han tenido que realizarse en una o dos versiones principales para trabajar sin interrupciones. Para los administradores de almacenamiento que no actualizan con frecuencia, esto se convierte en un importante dolor de cabeza y pesadilla logística cuando por fin es hora de actualizar ONTAP. ¿Quién desea actualizar y reiniciar varias veces en una ventana de mantenimiento?</p>
+</div>
+<div class="paragraph">
+<p>ONTAP 9.8 ahora admite actualizaciones a versiones de ONTAP en un plazo de dos años. Esto significa que si desea actualizar de 9.6 a 9.8, puede hacerlo directamente sin tener que ir a ONTAP 9.7.</p>
+</div>
+<div class="paragraph">
+<p>La siguiente tabla recoge las actualizaciones de las versiones de ONTAP de NetApp.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Punto de partida</th>
+<th class="tableblock halign-left valign-top">Actualización directa a:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.7, ONTAP 9.8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.8, ONTAP 9.n+2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP 9.n+1, ONTAP 9.n+2</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Este proceso simplificado de actualización también proporciona una forma de llevar a cabo renovaciones optimizadas. Cuando se envía un nodo de hardware nuevo, tiene la versión de ONTAP más reciente instalada. Anteriormente, si el clúster existente ejecutaba una versión de ONTAP anterior, tenía que actualizar los nodos existentes a la misma versión de ONTAP que el nodo nuevo o tenía que degradar el nodo nuevo a la versión de ONTAP anterior. Y, como complicación adicional, si el hardware más nuevo no se pudo reducir, se vio obligado a tomar una ventana de mantenimiento para actualizar el clúster existente.</p>
+</div>
+<div class="paragraph">
+<p>Con la ventana de versión mixta de 2 años de ONTAP 9.8, ahora es posible añadir nodos nuevos que ejecuten nuevas versiones de ONTAP a un clúster para permitir las actualizaciones de las controladoras moviendo volúmenes de los nodos que ejecuten 9.8 a versiones posteriores de ONTAP. Además, el proceso de actualización de reubicación de agregados no disruptiva permite la actualización de la controladora de los sistemas que deben ejecutar ONTAP 9.8 (por ejemplo, sistemas de la serie 8000) a los nuevos modelos que se introducen en versiones posteriores de ONTAP.</p>
+</div>
+<div class="paragraph">
+<p>Se recomienda limitar la hora en que el clúster de ONTAP opera en un estado de versión mixto.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image17.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Este proceso también se amplía a las actualizaciones de clúster, donde desea cambiar todo un par de alta disponibilidad de un clúster. Ahora es posible con el plazo de revisión de 2 años para ONTAP 9.8 y el movimiento de volúmenes no disruptivo.</p>
+</div>
+<div class="paragraph">
+<p>Los pasos básicos son los siguientes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Conecte los nuevos sistemas a un clúster existente, con versiones de ONTAP en una ventana de 2 años.</p>
+</li>
+<li>
+<p>Use movimiento de volúmenes no disruptivo para evacuar los nodos.</p>
+</li>
+<li>
+<p>Desúnase a los nodos antiguos del clúster.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./media/ontap98fo_image18.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p><a href="ontap98fo_data_protocols.html">"Siguiente: Protocolos de datos"</a></p>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/copyright/">© 2023 NetApp, Inc.</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Términos y condiciones</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Política de privacidad</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Política de Cookies</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Configuración de cookies</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="n-footer__bottom-right">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a target="_self" href="javascript:netapp_mailto()">Enviar comentarios sobre esta página</a>
+            </li>
+          </ul>
+        </div>
+        <div class="n-footer__social-links">
+          <ul class="n-footer__social-link-list">
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com"
+                target="_blank" title="blog" alt="blog">
+                <span class="n-footer__social-link-text">blog</span>
+                <svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+                  <title>blog@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#blog"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/"
+                target="_blank" title="community" alt="community">
+                <span class="n-footer__social-link-text">community</span>
+                <svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+                  <title>community@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#comments"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp"
+                target="_blank" title="twitter" alt="twitter">
+                <span class="n-footer__social-link-text">twitter</span>
+                <svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+                  <title>twitter@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#twitter"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp"
+                target="_blank" title="facebook" alt="facebook">
+                <span class="n-footer__social-link-text">facebook</span>
+                <svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+                  <title>facebook@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#facebook"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-linkedin"
+                href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+                <span class="n-footer__social-link-text">linkedin</span>
+                <svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+                  <title>linkedin@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#linkedin"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-youtube"
+                href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+                <span class="n-footer__social-link-text">youtube</span>
+                <svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+                  <title>youtube@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#youtube"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-slideshare"
+                href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+                <span class="n-footer__social-link-text">slideshare</span>
+                <svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+                  <title>slideshare@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/ontap-whatsnew/common/svg/sprite.svg#slideshare"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/es-es/ontap-whatsnew/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/es-es/ontap-whatsnew/js/prism.js'></script>
+      <script type="text/javascript" src='/es-es/ontap-whatsnew/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/es-es/ontap-whatsnew/js/www-ntap.js'></script>
+    <script src='/es-es/ontap-whatsnew/js/tabbed-blocks.js'></script>
+    <script src='/es-es/ontap-whatsnew/js/sidebar.js'></script>
+  </body></html>
